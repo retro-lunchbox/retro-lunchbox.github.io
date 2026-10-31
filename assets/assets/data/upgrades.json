@@ -134,30 +134,6 @@
         "name": "County yellow",
         "price": 250,
         "tint": "#F2B705"
-      },
-      {
-        "id": "pothole_patrol",
-        "name": "Pothole Patrol",
-        "price": 0,
-        "tint": "#FF7A1A",
-        "arcade": "pothole_paddle",
-        "_notes": "Free once the top score in Pothole Paddle (Retro Lunchbox arcade) is beaten."
-      },
-      {
-        "id": "goose_slayer",
-        "name": "Goose Slayer",
-        "price": 0,
-        "tint": "#C62828",
-        "arcade": "goose_invaders",
-        "_notes": "Free once the top score in Goose Invaders (Retro Lunchbox arcade) is beaten."
-      },
-      {
-        "id": "corn_guardian",
-        "name": "Corn Guardian",
-        "price": 0,
-        "tint": "#E8B830",
-        "arcade": "rootworm",
-        "_notes": "Free once the top score in Rootworm (Retro Lunchbox arcade) is beaten."
       }
     ],
     "logoDecal": {
