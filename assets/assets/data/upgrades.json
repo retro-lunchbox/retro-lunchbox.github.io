@@ -150,6 +150,14 @@
         "tint": "#C62828",
         "arcade": "goose_invaders",
         "_notes": "Free once the top score in Goose Invaders (Retro Lunchbox arcade) is beaten."
+      },
+      {
+        "id": "corn_guardian",
+        "name": "Corn Guardian",
+        "price": 0,
+        "tint": "#E8B830",
+        "arcade": "rootworm",
+        "_notes": "Free once the top score in Rootworm (Retro Lunchbox arcade) is beaten."
       }
     ],
     "logoDecal": {
