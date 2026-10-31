@@ -50975,7 +50975,7 @@ if(o>0){k=B.c.aN(o,0,1)
 o=r.db
 j=o==="TILT"
 n=j?34:18
-A.fu(a,o,B.yK,n,j?B.lE:B.a7,k)}if(p.fx>0&&!p.go)if((B.c.bt(p.e*4)&1)===0)A.fu(a,"BALL SAVE",B.WU,7,B.di,1)
+A.fu(a,o,B.yK,n,j?B.lE:B.a7,k)}if(p.fx>0&&!p.go)if((B.c.bt(p.e*4)&1)===0)A.fu(a,"BALL SAVE",B.WU,8,B.di,1)
 if(p.go&&r.cx<=0)A.fu(a,"TILT",B.yK,26,B.Km,1)
 if(p.d)A.fu(a,"THE FAIR IS CLOSED",B.WS,20,B.fz,1)
 s.restore()
@@ -117043,7 +117043,7 @@ B.WR=new A.e(12,128)
 B.WS=new A.e(139,220)
 B.WT=new A.e(139,240)
 B.yK=new A.e(139,268)
-B.WU=new A.e(139,386)
+B.WU=new A.e(139,300)
 B.yL=new A.e(150,170)
 B.WV=new A.e(150,190)
 B.nu=new A.e(150,200)
