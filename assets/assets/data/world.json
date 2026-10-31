@@ -1,0 +1,494 @@
+{
+  "_notes": "World layout (A1, re-laid-out in A2 and before A3). Positions are floor tiles: x runs down-right on screen, y runs down-left; [x, y, w, h] rectangles. 'building' is the garage (concrete floor, back walls on its x = 0 and y = 0 edges); 'walk' is where people can walk; 'areas' are ground colors drawn under everything. A station's 'at' is what it stands on (blocks walking once built), 'mat' is where you stand to use it; while a station is locked its price pad sits on its mat. unlock.priceFrom: 'drone' = that pad's drone price, 'hire' = the role's hirePrice (workers.json). rigUpgrade pads sell the next PC tier (pc_tiers.json) for their target rig. Counter: customers line up at 'queue' spots (front first; extra customers continue the line), walk in from 'enter', leave along 'exit'. Launch pad 'loop' = centre x, y and radius of the drone's flight loop. Art lives under assets/images/world/. Tall stations hide what's up-screen of them, so they stand against the back walls; test/layout_test.dart checks in screen space that no pad is under any station's art or the customer line, and that every name tag is next to its own station. Kiosks print one ticket every everySec divided by the number of launch pads in their zone (more pads, more tickets) and hold 'stack' tickets. Menu stations (office, mirror, miner, workbench, Help Wanted) open after standing still on them for menuHoldSec; pickup/drop-off mats and price pads work right away. A4 zones (tool/gen_zones.py writes them from one template): each zone has a 'gate' station (a zoneGate price pad standing in the zone before it, with a rep requirement); until it's bought the zone can't be entered and its stations don't exist. Stations without a price pad in a zone are built when the zone opens (the gate price covers its first drone and stations). Kiosk 'jobs' limits which jobs it prints. Rig 'tier' is the PC it starts with. unlock.license: also needs that license (Part 137 for the spray pad). Launch pad drone 'second' = the garage drone you didn't start with.",
+  "_picked": [
+    "the whole lot layout, player speed/carry, transfer rate, customer speed, camera zoom",
+    "kiosk: 4 tickets max, one every 7 s",
+    "2nd render rig $750, miner $100, cloud uplink $3,000",
+    "guide arrow for the first 3 jobs",
+    "kiosk holds 8; menuHoldSec 1.0",
+    "zone gate prices and rep levels (Yard $6,000 rep 1, Farm $18,000 rep 3, Construction $50,000 rep 5, County $90,000 rep 8)",
+    "starting rig tiers per zone (1/2/3/4) and 2nd rig prices",
+    "chemical shed: 6 jugs, one every 4 s"
+  ],
+  "tile": [
+    64,
+    32
+  ],
+  "cameraZoom": 1.3,
+  "zones": [
+    {
+      "id": "garage",
+      "name": "Garage",
+      "building": [
+        0,
+        0,
+        14,
+        10
+      ],
+      "walk": [
+        0.15,
+        0.15,
+        22.0,
+        9.75
+      ],
+      "areas": [
+        {
+          "rect": [
+            14,
+            0,
+            8.4,
+            10
+          ],
+          "color": "#A6D082"
+        },
+        {
+          "rect": [
+            5.0,
+            10,
+            3.4,
+            13
+          ],
+          "color": "#B8B4AC"
+        },
+        {
+          "rect": [
+            7.0,
+            10.6,
+            20,
+            2.4
+          ],
+          "color": "#B8B4AC"
+        }
+      ]
+    },
+    {
+      "id": "yard",
+      "name": "Yard",
+      "gate": "gate_yard",
+      "props": [
+        {
+          "sprite": "world/prop_house.png",
+          "at": [
+            25.8,
+            -3.6,
+            3.0,
+            2.6
+          ]
+        },
+        {
+          "sprite": "world/prop_tree.png",
+          "at": [
+            30.8,
+            -2.0,
+            1.0,
+            1.0
+          ]
+        },
+        {
+          "sprite": "world/prop_tree.png",
+          "at": [
+            37.4,
+            -2.4,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "walk": [
+        22.15,
+        0.15,
+        18.1,
+        9.75
+      ],
+      "areas": [
+        {
+          "rect": [
+            22.2,
+            0,
+            3.0,
+            10
+          ],
+          "color": "#BFA98A"
+        },
+        {
+          "rect": [
+            25.2,
+            0,
+            15.0,
+            10
+          ],
+          "color": "#B5D98E"
+        },
+        {
+          "rect": [
+            30.2,
+            10,
+            3.4,
+            14
+          ],
+          "color": "#B8B4AC"
+        },
+        {
+          "rect": [
+            34.2,
+            10.5,
+            2.0,
+            14
+          ],
+          "color": "#B8B4AC"
+        }
+      ]
+    },
+    {
+      "id": "farm",
+      "name": "Farm zone",
+      "gate": "gate_farm",
+      "props": [
+        {
+          "sprite": "world/prop_barn.png",
+          "at": [
+            43.6,
+            -3.8,
+            3.0,
+            2.8
+          ]
+        },
+        {
+          "sprite": "world/prop_silo.png",
+          "at": [
+            47.2,
+            -2.6,
+            1.2,
+            1.2
+          ]
+        },
+        {
+          "sprite": "world/prop_hay.png",
+          "at": [
+            55.2,
+            -1.8,
+            1.4,
+            0.9
+          ]
+        }
+      ],
+      "walk": [
+        40.15,
+        0.15,
+        18.1,
+        9.75
+      ],
+      "areas": [
+        {
+          "rect": [
+            40.2,
+            0,
+            3.0,
+            10
+          ],
+          "color": "#BFA98A"
+        },
+        {
+          "rect": [
+            43.2,
+            0,
+            15.0,
+            10
+          ],
+          "color": "#D8C47A"
+        },
+        {
+          "rect": [
+            48.2,
+            10,
+            3.4,
+            14
+          ],
+          "color": "#B8B4AC"
+        },
+        {
+          "rect": [
+            52.2,
+            10.5,
+            2.0,
+            14
+          ],
+          "color": "#B8B4AC"
+        }
+      ]
+    },
+    {
+      "id": "construction",
+      "name": "Construction zone",
+      "gate": "gate_construction",
+      "props": [
+        {
+          "sprite": "world/prop_trailer.png",
+          "at": [
+            61.6,
+            -2.8,
+            2.6,
+            1.4
+          ]
+        },
+        {
+          "sprite": "world/prop_excavator.png",
+          "at": [
+            68.8,
+            -3.4,
+            2.2,
+            1.6
+          ]
+        },
+        {
+          "sprite": "world/prop_dirt_pile.png",
+          "at": [
+            72.8,
+            -2.6,
+            2.0,
+            1.6
+          ]
+        },
+        {
+          "sprite": "world/prop_cones.png",
+          "at": [
+            65.4,
+            -1.2,
+            1.4,
+            0.6
+          ]
+        }
+      ],
+      "walk": [
+        58.15,
+        0.15,
+        18.1,
+        9.75
+      ],
+      "areas": [
+        {
+          "rect": [
+            58.2,
+            0,
+            3.0,
+            10
+          ],
+          "color": "#BFA98A"
+        },
+        {
+          "rect": [
+            61.2,
+            0,
+            15.0,
+            10
+          ],
+          "color": "#C9A27E"
+        },
+        {
+          "rect": [
+            66.2,
+            10,
+            3.4,
+            14
+          ],
+          "color": "#B8B4AC"
+        },
+        {
+          "rect": [
+            70.2,
+            10.5,
+            2.0,
+            14
+          ],
+          "color": "#B8B4AC"
+        }
+      ]
+    },
+    {
+      "id": "county",
+      "name": "County / DOT office",
+      "gate": "gate_county",
+      "props": [
+        {
+          "sprite": "world/prop_county_office.png",
+          "at": [
+            79.6,
+            -4.2,
+            3.6,
+            3.0
+          ]
+        },
+        {
+          "sprite": "world/prop_flagpole.png",
+          "at": [
+            84.2,
+            -1.4,
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "sprite": "world/prop_tree.png",
+          "at": [
+            91.6,
+            -2.2,
+            1.0,
+            1.0
+          ]
+        }
+      ],
+      "walk": [
+        76.15,
+        0.15,
+        18.1,
+        9.75
+      ],
+      "areas": [
+        {
+          "rect": [
+            76.2,
+            0,
+            3.0,
+            10
+          ],
+          "color": "#BFA98A"
+        },
+        {
+          "rect": [
+            79.2,
+            0,
+            15.0,
+            10
+          ],
+          "color": "#D3D6DB"
+        },
+        {
+          "rect": [
+            84.2,
+            10,
+            3.4,
+            14
+          ],
+          "color": "#B8B4AC"
+        },
+        {
+          "rect": [
+            88.2,
+            10.5,
+            2.0,
+            14
+          ],
+          "color": "#B8B4AC"
+        }
+      ]
+    }
+  ],
+  "player": {
+    "start": [
+      6.0,
+      5.0
+    ],
+    "speedPx": 165,
+    "carry": 6,
+    "radius": 0.28
+  },
+  "transferPerSec": 8,
+  "customerSpeed": 2.2,
+  "guideJobs": 3,
+  "menuHoldSec": 1.0,
+  "stations": [
+    {"id": "office", "type": "office", "label": "Office", "sprite": "world/office.png", "at": [0.2, 2.6, 1.1, 1.6], "mat": [1.6, 2.8, 1.1, 1.2]},
+    {"id": "quit_job", "type": "quitJob", "label": "Quit the Day Job", "mat": [3.3, 3.4, 1.0, 1.0], "unlock": {"priceFrom": "quit"}},
+    {"id": "kiosk", "type": "kiosk", "label": "Job kiosk", "sprite": "world/kiosk.png", "at": [0.2, 4.8, 1.0, 1.2], "mat": [1.5, 4.8, 1.1, 1.2], "stack": 8, "everySec": 7},
+    {"id": "hire_pilot", "type": "hire", "role": "pilot", "label": "Hire a pilot", "mat": [3.5, 6.6, 1.0, 1.0], "unlock": {"priceFrom": "hire"}},
+    {"id": "miner", "type": "miner", "label": "Crypto miner", "sprite": "world/miner.png", "at": [0.2, 7.6, 1.1, 1.1], "mat": [1.6, 7.6, 1.0, 1.1], "unlock": {"price": 600}},
+    {"id": "workbench", "type": "workbench", "label": "Workbench", "sprite": "world/workbench.png", "at": [2.2, 0.2, 1.8, 1.0], "mat": [2.6, 1.5, 1.1, 1.0]},
+    {"id": "staff", "type": "staff", "label": "Help Wanted", "sprite": "world/help_board.png", "at": [4.6, 0.1, 1.4, 0.35], "mat": [4.8, 0.8, 1.0, 1.0]},
+    {"id": "rig1", "type": "rig", "label": "Render rig", "at": [6.6, 0.2, 1.6, 1.2], "mat": [6.85, 1.7, 1.1, 1.0], "stack": 20},
+    {"id": "rig1_up", "type": "rigUpgrade", "label": "Upgrade PC", "target": "rig1", "mat": [6.9, 3.1, 1.0, 1.0]},
+    {"id": "rig2", "type": "rig", "label": "2nd render rig", "at": [10.0, 0.2, 1.6, 1.2], "mat": [10.25, 1.7, 1.1, 1.0], "stack": 20, "unlock": {"price": 750}},
+    {"id": "rig2_up", "type": "rigUpgrade", "label": "Upgrade PC", "target": "rig2", "mat": [10.3, 3.1, 1.0, 1.0]},
+    {"id": "mirror", "type": "mirror", "label": "Mirror", "sprite": "world/mirror.png", "at": [12.8, 0.1, 1.1, 0.45], "mat": [12.85, 0.9, 1.0, 1.0]},
+    {"id": "hire_runner", "type": "hire", "role": "runner", "label": "Hire a data runner", "mat": [9.0, 5.2, 1.0, 1.0], "unlock": {"priceFrom": "hire"}},
+    {"id": "counter", "type": "counter", "label": "Client counter", "sprite": "world/counter.png", "at": [5.0, 9.5, 3.4, 0.9], "mat": [5.4, 7.4, 2.6, 1.0], "stack": 12, "cashAt": "cash", "queue": [[6.7, 11.0], [6.7, 11.9], [6.7, 12.8], [6.7, 13.7], [6.7, 14.6]], "enter": [6.7, 22.0], "exit": [[10.0, 11.4], [16.0, 13.4], [26.0, 18.0]]},
+    {"id": "hire_clerk", "type": "hire", "role": "clerk", "label": "Hire a clerk", "mat": [6.2, 6.1, 1.0, 0.9], "unlock": {"priceFrom": "hire"}},
+    {"id": "cash", "type": "cash", "label": "Cash", "mat": [8.7, 8.0, 1.1, 1.0]},
+    {"id": "bin", "type": "bin", "label": "Return bin", "mat": [12.0, 5.4, 0.9, 0.9]},
+    {"id": "hire_collector", "type": "hire", "role": "collector", "label": "Hire a cash collector", "mat": [10.3, 8.0, 1.0, 1.0], "unlock": {"priceFrom": "hire"}},
+    {"id": "pad1", "type": "launchPad", "label": "Launch pad", "sprite": "world/launch_pad.png", "drone": "starter", "at": [14.6, 1.0, 2.2, 2.2], "mat": [14.9, 3.5, 1.6, 1.0], "stack": 3, "loop": [15.7, -2.6, 2.0]},
+    {"id": "dock_pad1", "type": "dock", "label": "Dock", "target": "pad1", "mat": [15.2, 4.8, 1.0, 0.9], "unlock": {"priceFrom": "dock", "license": "part108", "requires": ["pad1"]}},
+    {"id": "pad2", "type": "launchPad", "label": "2nd launch pad", "sprite": "world/launch_pad.png", "drone": "starter", "at": [19.4, 1.0, 2.2, 2.2], "mat": [19.7, 3.5, 1.6, 1.0], "stack": 3, "loop": [20.5, -2.6, 2.0], "unlock": {"priceFrom": "drone"}},
+    {"id": "dock_pad2", "type": "dock", "label": "Dock", "target": "pad2", "mat": [18.3, 1.3, 0.95, 0.95], "unlock": {"priceFrom": "dock", "license": "part108", "requires": ["pad2"]}},
+    {"id": "uplink", "type": "uplink", "label": "Cloud uplink", "sprite": "world/uplink.png", "at": [19.6, 5.5, 1.0, 1.0], "mat": [20.8, 5.5, 1.0, 1.0], "stack": 20, "unlock": {"price": 3000}},
+    {"id": "gate_yard", "type": "zoneGate", "label": "Yard gate", "opens": "yard", "zone": "garage", "mat": [20.6, 7.8, 1.2, 1.0], "unlock": {"price": 6000, "rep": 1}},
+    {"id": "kiosk_y", "type": "kiosk", "label": "Job kiosk", "sprite": "world/kiosk.png", "at": [25.5, 0.6, 1.0, 1.2], "mat": [26.8, 0.6, 1.1, 1.2], "stack": 8, "everySec": 9, "zone": "yard"},
+    {"id": "pad_y1", "type": "launchPad", "label": "Launch pad", "sprite": "world/launch_pad.png", "drone": "second", "at": [28.2, 0.3, 2.2, 2.2], "mat": [28.5, 2.8, 1.6, 1.0], "stack": 3, "loop": [29.3, -2.9, 2.0], "zone": "yard"},
+    {"id": "dock_y1", "type": "dock", "label": "Dock", "target": "pad_y1", "mat": [28.8, 4.1, 1.0, 0.9], "unlock": {"priceFrom": "dock", "license": "part108", "requires": ["pad_y1"]}, "zone": "yard"},
+    {"id": "pad_y2", "type": "launchPad", "label": "2nd launch pad", "sprite": "world/launch_pad.png", "drone": "second", "at": [31.4, 0.3, 2.2, 2.2], "mat": [31.7, 2.8, 1.6, 1.0], "stack": 3, "loop": [32.5, -2.9, 2.0], "unlock": {"priceFrom": "drone"}, "zone": "yard"},
+    {"id": "dock_y2", "type": "dock", "label": "Dock", "target": "pad_y2", "mat": [32.0, 4.1, 1.0, 0.9], "unlock": {"priceFrom": "dock", "license": "part108", "requires": ["pad_y2"]}, "zone": "yard"},
+    {"id": "rig_y1", "type": "rig", "label": "Render rig", "at": [34.6, 0.2, 1.6, 1.2], "mat": [34.85, 1.7, 1.1, 1.0], "stack": 20, "tier": 1, "zone": "yard"},
+    {"id": "rig_y1_up", "type": "rigUpgrade", "label": "Upgrade PC", "target": "rig_y1", "mat": [34.9, 3.1, 1.0, 1.0], "zone": "yard"},
+    {"id": "rig_y2", "type": "rig", "label": "2nd render rig", "at": [37.6, 0.2, 1.6, 1.2], "mat": [37.85, 1.7, 1.1, 1.0], "stack": 20, "tier": 1, "unlock": {"price": 750}, "zone": "yard"},
+    {"id": "rig_y2_up", "type": "rigUpgrade", "label": "Upgrade PC", "target": "rig_y2", "mat": [37.9, 3.1, 1.0, 1.0], "zone": "yard"},
+    {"id": "counter_y", "type": "counter", "label": "Client counter", "sprite": "world/counter.png", "at": [30.2, 9.5, 3.4, 0.9], "mat": [30.6, 7.4, 2.6, 1.0], "stack": 12, "cashAt": "cash_y", "queue": [[31.9, 11.0], [31.9, 11.9], [31.9, 12.8], [31.9, 13.7], [31.9, 14.6]], "enter": [31.9, 22.0], "exit": [[35.2, 11.6], [35.2, 24.0]], "zone": "yard"},
+    {"id": "cash_y", "type": "cash", "label": "Cash", "mat": [34.2, 8.0, 1.1, 1.0], "zone": "yard"},
+    {"id": "bin_y", "type": "bin", "label": "Return bin", "mat": [36.9, 4.6, 0.9, 0.9], "zone": "yard"},
+    {"id": "hire_pilot_y", "type": "hire", "role": "pilot", "label": "Hire a pilot", "mat": [27.2, 4.0, 1.0, 1.0], "unlock": {"priceFrom": "hire"}, "zone": "yard"},
+    {"id": "hire_runner_y", "type": "hire", "role": "runner", "label": "Hire a data runner", "mat": [34.8, 5.9, 1.0, 1.0], "unlock": {"priceFrom": "hire"}, "zone": "yard"},
+    {"id": "hire_clerk_y", "type": "hire", "role": "clerk", "label": "Hire a clerk", "mat": [30.2, 6.1, 1.0, 0.9], "unlock": {"priceFrom": "hire"}, "zone": "yard"},
+    {"id": "hire_collector_y", "type": "hire", "role": "collector", "label": "Hire a cash collector", "mat": [35.8, 8.0, 1.0, 1.0], "unlock": {"priceFrom": "hire"}, "zone": "yard"},
+    {"id": "gate_farm", "type": "zoneGate", "label": "Farm gate", "opens": "farm", "zone": "yard", "mat": [38.2, 6.8, 1.6, 1.3], "unlock": {"price": 15000, "rep": 3}},
+    {"id": "kiosk_f", "type": "kiosk", "label": "Job kiosk", "sprite": "world/kiosk.png", "at": [43.5, 0.6, 1.0, 1.2], "mat": [44.8, 0.6, 1.1, 1.2], "stack": 8, "everySec": 9, "zone": "farm"},
+    {"id": "pad_f1", "type": "launchPad", "label": "Launch pad", "sprite": "world/launch_pad.png", "drone": "multispectral", "at": [46.2, 0.3, 2.2, 2.2], "mat": [46.5, 2.8, 1.6, 1.0], "stack": 3, "loop": [47.3, -2.9, 2.0], "zone": "farm"},
+    {"id": "dock_f1", "type": "dock", "label": "Dock", "target": "pad_f1", "mat": [46.8, 4.1, 1.0, 0.9], "unlock": {"priceFrom": "dock", "license": "part108", "requires": ["pad_f1"]}, "zone": "farm"},
+    {"id": "pad_f2", "type": "launchPad", "label": "Spray pad", "sprite": "world/launch_pad.png", "drone": "spray", "at": [49.4, 0.3, 2.2, 2.2], "mat": [49.7, 2.8, 1.6, 1.0], "stack": 3, "loop": [50.5, -2.9, 2.0], "unlock": {"priceFrom": "drone", "license": "part137"}, "zone": "farm"},
+    {"id": "dock_f2", "type": "dock", "label": "Dock", "target": "pad_f2", "mat": [50.0, 4.1, 1.0, 0.9], "unlock": {"priceFrom": "dock", "license": "part108", "requires": ["pad_f2"]}, "zone": "farm"},
+    {"id": "rig_f1", "type": "rig", "label": "Render rig", "at": [52.6, 0.2, 1.6, 1.2], "mat": [52.85, 1.7, 1.1, 1.0], "stack": 20, "tier": 2, "zone": "farm"},
+    {"id": "rig_f1_up", "type": "rigUpgrade", "label": "Upgrade PC", "target": "rig_f1", "mat": [52.9, 3.1, 1.0, 1.0], "zone": "farm"},
+    {"id": "rig_f2", "type": "rig", "label": "2nd render rig", "at": [55.6, 0.2, 1.6, 1.2], "mat": [55.85, 1.7, 1.1, 1.0], "stack": 20, "tier": 2, "unlock": {"price": 4000}, "zone": "farm"},
+    {"id": "rig_f2_up", "type": "rigUpgrade", "label": "Upgrade PC", "target": "rig_f2", "mat": [55.9, 3.1, 1.0, 1.0], "zone": "farm"},
+    {"id": "shed", "type": "shed", "label": "Chemical shed", "sprite": "world/shed.png", "at": [43.5, 6.4, 1.2, 1.4], "mat": [45.0, 6.6, 1.0, 1.1], "stack": 6, "everySec": 4, "zone": "farm"},
+    {"id": "counter_f", "type": "counter", "label": "Client counter", "sprite": "world/counter.png", "at": [48.2, 9.5, 3.4, 0.9], "mat": [48.6, 7.4, 2.6, 1.0], "stack": 12, "cashAt": "cash_f", "queue": [[49.9, 11.0], [49.9, 11.9], [49.9, 12.8], [49.9, 13.7], [49.9, 14.6]], "enter": [49.9, 22.0], "exit": [[53.2, 11.6], [53.2, 24.0]], "zone": "farm"},
+    {"id": "cash_f", "type": "cash", "label": "Cash", "mat": [52.2, 8.0, 1.1, 1.0], "zone": "farm"},
+    {"id": "bin_f", "type": "bin", "label": "Return bin", "mat": [54.9, 4.6, 0.9, 0.9], "zone": "farm"},
+    {"id": "hire_pilot_f", "type": "hire", "role": "pilot", "label": "Hire a pilot", "mat": [45.2, 4.0, 1.0, 1.0], "unlock": {"priceFrom": "hire"}, "zone": "farm"},
+    {"id": "hire_runner_f", "type": "hire", "role": "runner", "label": "Hire a data runner", "mat": [52.8, 5.9, 1.0, 1.0], "unlock": {"priceFrom": "hire"}, "zone": "farm"},
+    {"id": "hire_clerk_f", "type": "hire", "role": "clerk", "label": "Hire a clerk", "mat": [48.2, 6.1, 1.0, 0.9], "unlock": {"priceFrom": "hire"}, "zone": "farm"},
+    {"id": "hire_collector_f", "type": "hire", "role": "collector", "label": "Hire a cash collector", "mat": [53.8, 8.0, 1.0, 1.0], "unlock": {"priceFrom": "hire"}, "zone": "farm"},
+    {"id": "gate_construction", "type": "zoneGate", "label": "Construction gate", "opens": "construction", "zone": "farm", "mat": [56.2, 6.8, 1.6, 1.3], "unlock": {"price": 40000, "rep": 5}},
+    {"id": "kiosk_c", "type": "kiosk", "label": "Job kiosk", "sprite": "world/kiosk.png", "at": [61.5, 0.6, 1.0, 1.2], "mat": [62.8, 0.6, 1.1, 1.2], "stack": 8, "everySec": 9, "jobs": ["stockpile_volume", "topo_survey", "building_3d", "construction_survey"], "zone": "construction"},
+    {"id": "pad_c1", "type": "launchPad", "label": "Launch pad", "sprite": "world/launch_pad.png", "drone": "lidar", "at": [64.2, 0.3, 2.2, 2.2], "mat": [64.5, 2.8, 1.6, 1.0], "stack": 3, "loop": [65.3, -2.9, 2.0], "zone": "construction"},
+    {"id": "dock_c1", "type": "dock", "label": "Dock", "target": "pad_c1", "mat": [64.8, 4.1, 1.0, 0.9], "unlock": {"priceFrom": "dock", "license": "part108", "requires": ["pad_c1"]}, "zone": "construction"},
+    {"id": "pad_c2", "type": "launchPad", "label": "2nd launch pad", "sprite": "world/launch_pad.png", "drone": "lidar", "at": [67.4, 0.3, 2.2, 2.2], "mat": [67.7, 2.8, 1.6, 1.0], "stack": 3, "loop": [68.5, -2.9, 2.0], "unlock": {"priceFrom": "drone"}, "zone": "construction"},
+    {"id": "dock_c2", "type": "dock", "label": "Dock", "target": "pad_c2", "mat": [68.0, 4.1, 1.0, 0.9], "unlock": {"priceFrom": "dock", "license": "part108", "requires": ["pad_c2"]}, "zone": "construction"},
+    {"id": "rig_c1", "type": "rig", "label": "Render rig", "at": [70.6, 0.2, 1.6, 1.2], "mat": [70.85, 1.7, 1.1, 1.0], "stack": 20, "tier": 3, "zone": "construction"},
+    {"id": "rig_c1_up", "type": "rigUpgrade", "label": "Upgrade PC", "target": "rig_c1", "mat": [70.9, 3.1, 1.0, 1.0], "zone": "construction"},
+    {"id": "rig_c2", "type": "rig", "label": "2nd render rig", "at": [73.6, 0.2, 1.6, 1.2], "mat": [73.85, 1.7, 1.1, 1.0], "stack": 20, "tier": 3, "unlock": {"price": 12000}, "zone": "construction"},
+    {"id": "rig_c2_up", "type": "rigUpgrade", "label": "Upgrade PC", "target": "rig_c2", "mat": [73.9, 3.1, 1.0, 1.0], "zone": "construction"},
+    {"id": "counter_c", "type": "counter", "label": "Client counter", "sprite": "world/counter.png", "at": [66.2, 9.5, 3.4, 0.9], "mat": [66.6, 7.4, 2.6, 1.0], "stack": 12, "cashAt": "cash_c", "queue": [[67.9, 11.0], [67.9, 11.9], [67.9, 12.8], [67.9, 13.7], [67.9, 14.6]], "enter": [67.9, 22.0], "exit": [[71.2, 11.6], [71.2, 24.0]], "zone": "construction"},
+    {"id": "cash_c", "type": "cash", "label": "Cash", "mat": [70.2, 8.0, 1.1, 1.0], "zone": "construction"},
+    {"id": "bin_c", "type": "bin", "label": "Return bin", "mat": [72.9, 4.6, 0.9, 0.9], "zone": "construction"},
+    {"id": "hire_pilot_c", "type": "hire", "role": "pilot", "label": "Hire a pilot", "mat": [63.2, 4.0, 1.0, 1.0], "unlock": {"priceFrom": "hire"}, "zone": "construction"},
+    {"id": "hire_runner_c", "type": "hire", "role": "runner", "label": "Hire a data runner", "mat": [70.8, 5.9, 1.0, 1.0], "unlock": {"priceFrom": "hire"}, "zone": "construction"},
+    {"id": "hire_clerk_c", "type": "hire", "role": "clerk", "label": "Hire a clerk", "mat": [66.2, 6.1, 1.0, 0.9], "unlock": {"priceFrom": "hire"}, "zone": "construction"},
+    {"id": "hire_collector_c", "type": "hire", "role": "collector", "label": "Hire a cash collector", "mat": [71.8, 8.0, 1.0, 1.0], "unlock": {"priceFrom": "hire"}, "zone": "construction"},
+    {"id": "gate_county", "type": "zoneGate", "label": "County / DOT gate", "opens": "county", "zone": "construction", "mat": [74.2, 6.8, 1.6, 1.3], "unlock": {"price": 150000, "rep": 8}},
+    {"id": "kiosk_k", "type": "kiosk", "label": "Job kiosk", "sprite": "world/kiosk.png", "at": [79.5, 0.6, 1.0, 1.2], "mat": [80.8, 0.6, 1.1, 1.2], "stack": 8, "everySec": 9, "jobs": ["county_bridge_survey", "dot_corridor"], "zone": "county"},
+    {"id": "pad_k1", "type": "launchPad", "label": "Launch pad", "sprite": "world/launch_pad.png", "drone": "lidar", "at": [82.2, 0.3, 2.2, 2.2], "mat": [82.5, 2.8, 1.6, 1.0], "stack": 3, "loop": [83.3, -2.9, 2.0], "zone": "county"},
+    {"id": "dock_k1", "type": "dock", "label": "Dock", "target": "pad_k1", "mat": [82.8, 4.1, 1.0, 0.9], "unlock": {"priceFrom": "dock", "license": "part108", "requires": ["pad_k1"]}, "zone": "county"},
+    {"id": "pad_k2", "type": "launchPad", "label": "2nd launch pad", "sprite": "world/launch_pad.png", "drone": "lidar", "at": [85.4, 0.3, 2.2, 2.2], "mat": [85.7, 2.8, 1.6, 1.0], "stack": 3, "loop": [86.5, -2.9, 2.0], "unlock": {"priceFrom": "drone"}, "zone": "county"},
+    {"id": "dock_k2", "type": "dock", "label": "Dock", "target": "pad_k2", "mat": [86.0, 4.1, 1.0, 0.9], "unlock": {"priceFrom": "dock", "license": "part108", "requires": ["pad_k2"]}, "zone": "county"},
+    {"id": "rig_k1", "type": "rig", "label": "Render rig", "at": [88.6, 0.2, 1.6, 1.2], "mat": [88.85, 1.7, 1.1, 1.0], "stack": 20, "tier": 4, "zone": "county"},
+    {"id": "rig_k1_up", "type": "rigUpgrade", "label": "Upgrade PC", "target": "rig_k1", "mat": [88.9, 3.1, 1.0, 1.0], "zone": "county"},
+    {"id": "rig_k2", "type": "rig", "label": "2nd render rig", "at": [91.6, 0.2, 1.6, 1.2], "mat": [91.85, 1.7, 1.1, 1.0], "stack": 20, "tier": 4, "unlock": {"price": 25000}, "zone": "county"},
+    {"id": "rig_k2_up", "type": "rigUpgrade", "label": "Upgrade PC", "target": "rig_k2", "mat": [91.9, 3.1, 1.0, 1.0], "zone": "county"},
+    {"id": "contracts", "type": "contracts", "label": "Contracts board", "sprite": "world/contracts_board.png", "at": [79.5, 6.4, 0.35, 1.4], "mat": [80.1, 6.6, 1.0, 1.0], "zone": "county"},
+    {"id": "counter_k", "type": "counter", "label": "Client counter", "sprite": "world/counter.png", "at": [84.2, 9.5, 3.4, 0.9], "mat": [84.6, 7.4, 2.6, 1.0], "stack": 12, "cashAt": "cash_k", "queue": [[85.9, 11.0], [85.9, 11.9], [85.9, 12.8], [85.9, 13.7], [85.9, 14.6]], "enter": [85.9, 22.0], "exit": [[89.2, 11.6], [89.2, 24.0]], "zone": "county"},
+    {"id": "cash_k", "type": "cash", "label": "Cash", "mat": [88.2, 8.0, 1.1, 1.0], "zone": "county"},
+    {"id": "bin_k", "type": "bin", "label": "Return bin", "mat": [90.9, 4.6, 0.9, 0.9], "zone": "county"},
+    {"id": "hire_pilot_k", "type": "hire", "role": "pilot", "label": "Hire a pilot", "mat": [81.2, 4.0, 1.0, 1.0], "unlock": {"priceFrom": "hire"}, "zone": "county"},
+    {"id": "hire_runner_k", "type": "hire", "role": "runner", "label": "Hire a data runner", "mat": [88.8, 5.9, 1.0, 1.0], "unlock": {"priceFrom": "hire"}, "zone": "county"},
+    {"id": "hire_clerk_k", "type": "hire", "role": "clerk", "label": "Hire a clerk", "mat": [84.2, 6.1, 1.0, 0.9], "unlock": {"priceFrom": "hire"}, "zone": "county"},
+    {"id": "hire_collector_k", "type": "hire", "role": "collector", "label": "Hire a cash collector", "mat": [89.8, 8.0, 1.0, 1.0], "unlock": {"priceFrom": "hire"}, "zone": "county"}
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "_notes": "Source: GAME_DESIGN.md sections 4 and 12. Values in _picked were chosen by Claude as placeholders (Oscar: tweak freely). Everything else is from GAME_DESIGN.md or Oscar's Phase 1 answers. Client tier reps were re-picked in Phase 3 to line up with the jobs each tier brings.",
+  "towns": [
+    {
+      "id": "broom",
+      "name": "Broom",
+      "repRequired": 0,
+      "notes": "Starting town. Grain elevator, water tower, one stoplight, county shed."
+    },
+    {
+      "id": "amesly",
+      "name": "Amesly",
+      "repRequired": 2,
+      "notes": "College town, rival's home base"
+    },
+    {
+      "id": "des_moyne",
+      "name": "Des Moyne",
+      "repRequired": 4,
+      "notes": "The big city, developers and construction"
+    },
+    {
+      "id": "cornfield_crossing",
+      "name": "Cornfield Crossing",
+      "repRequired": 3,
+      "notes": "Heavy farm country"
+    },
+    {
+      "id": "capitol_city",
+      "name": "Capitol City",
+      "repRequired": 7,
+      "notes": "State government contracts"
+    }
+  ],
+  "clientTiers": [
+    {
+      "id": "neighbors_realtors",
+      "name": "Neighbors & realtors",
+      "repRequired": 0
+    },
+    {
+      "id": "farmers_insurance",
+      "name": "Farmers & insurance",
+      "repRequired": 0
+    },
+    {
+      "id": "contractors_developers",
+      "name": "Contractors & developers",
+      "repRequired": 2
+    },
+    {
+      "id": "city_of_broom",
+      "name": "City of Broom",
+      "repRequired": 4
+    },
+    {
+      "id": "broom_county",
+      "name": "Broom County",
+      "repRequired": 6
+    },
+    {
+      "id": "flyowa_dot",
+      "name": "Flyowa DOT",
+      "repRequired": 9
+    }
+  ],
+  "rival": {
+    "id": "cyclone_aerial",
+    "name": "Cyclone Aerial",
+    "homeTown": "amesly",
+    "notes": "Undercuts your bids, steals clients if your rep slips",
+    "undercutPct": 0.1,
+    "stealsClientsWhenRepDropsLevels": 1
+  },
+  "_picked": [
+    "repRequired for towns and client tiers",
+    "rival numbers"
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "_notes": "Garage Crypto Miner (GAME_DESIGN 17.2; A2 rules from Oscar 2026-10-29). The basic miner (unit 'base', bought on its price pad in the garage) earns from taps only. Idle income starts with the Cooling fan (fan.idlePerHour, a flat amount per game hour); the Second miner (needs the fan) and the Mining rack (needs the second miner) add their idlePerHour. Taps pay tap.base + tap.perChipLevel x chip level. The block lottery rolls once a day at block.rollHour. Power is billed weekly. Offline: offline.gameHoursPerRealHour game hours of idle income per real hour away, capped at offline.maxRealHours. Balance targets are tuned in A6.",
+  "_picked": [
+    "every price, rate, chance and power cost below except tap.base 1, fan $2/h idle (Oscar) and the $25,000 jackpot (design doc)",
+    "offline conversion (1 game hour per real hour)",
+    "base miner power 5/week (it no longer earns idle)",
+    "A6 balance bot (test/balance, 2026-10-30): tap.base 5 (miner ~25-30% of income in the first 10 min), idle fan 1/h, second 1/h, rack 3/h and rack $25,000 (under 5% once the farm opens), block odds per upgrade lowered; jackpot stays $25,000 (design doc)"
+  ],
+  "tap": {
+    "base": 5,
+    "perChipLevel": 1
+  },
+  "chips": {
+    "name": "Faster chips",
+    "prices": [
+      150,
+      400,
+      900,
+      2000,
+      4500
+    ]
+  },
+  "fan": {
+    "name": "Cooling fan",
+    "price": 800,
+    "idlePerHour": 1,
+    "powerPerWeek": 5
+  },
+  "units": [
+    {
+      "id": "base",
+      "name": "Garage miner",
+      "price": 0,
+      "idlePerHour": 0,
+      "powerPerWeek": 5
+    },
+    {
+      "id": "second",
+      "name": "Second miner",
+      "price": 2500,
+      "idlePerHour": 1,
+      "powerPerWeek": 15,
+      "requires": "fan"
+    },
+    {
+      "id": "rack",
+      "name": "Mining rack",
+      "price": 25000,
+      "requires": "second",
+      "idlePerHour": 3,
+      "powerPerWeek": 60
+    }
+  ],
+  "block": {
+    "jackpot": 10000,
+    "rollHour": 0,
+    "baseDailyChance": 0.002,
+    "perChipLevel": 0.0002,
+    "fan": 0.0002,
+    "second": 0.0004,
+    "rack": 0.0008
+  },
+  "powerBill": {
+    "weekday": "fri",
+    "hour": 17
+  },
+  "offline": {
+    "maxRealHours": 8,
+    "gameHoursPerRealHour": 1
+  }
+}

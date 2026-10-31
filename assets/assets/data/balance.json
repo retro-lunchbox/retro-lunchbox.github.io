@@ -1,0 +1,171 @@
+{
+  "_notes": "Core numbers. Values in _picked were chosen by Claude as placeholders (Oscar: tweak freely). Everything else is from GAME_DESIGN.md or Oscar's Phase 1 answers.",
+  "saveVersion": 5,
+  "start": {
+    "cash": 3000,
+    "renderTier": 1,
+    "hq": "garage",
+    "vehicle": "pickup",
+    "batteriesPerDrone": 2,
+    "licenses": [
+      "part107"
+    ],
+    "season": "spring",
+    "weekday": "sat",
+    "hour": 8,
+    "starterDrones": [
+      "media",
+      "thermal"
+    ]
+  },
+  "starterLoan": {
+    "_notes": "Principal = starter drone price - start cash (none if the drone costs less). Flat interest: total owed = principal x (1 + flatInterest), paid in termWeeks equal weekly payments. A missed payment adds the late fee to the balance and costs rep; missing repossessAfterMissedInARow in a row takes the drone. Early payoff = whatever is still owed, no penalty.",
+    "flatInterest": 0.15,
+    "termWeeks": 20,
+    "dueWeekday": "fri",
+    "dueHour": 17,
+    "lateFee": 100,
+    "missedPaymentRep": -5,
+    "repossessAfterMissedInARow": 3
+  },
+  "licenses": {
+    "part107": {
+      "name": "Part 107",
+      "price": 0,
+      "days": 0
+    },
+    "part137": {
+      "name": "Part 137",
+      "price": 1500,
+      "days": 5,
+      "freeWithStarterDrone": "spray"
+    },
+    "part108": {
+      "name": "Part 108",
+      "price": 5000,
+      "days": 10,
+      "rep": 4
+    }
+  },
+  "time": {
+    "realSecondsPerGameDayAt1x": 180,
+    "speeds": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "debugSpeed": 10,
+    "daysPerSeason": 15,
+    "seasons": [
+      "spring",
+      "summer",
+      "fall",
+      "winter"
+    ],
+    "daysPerWeek": 7
+  },
+  "save": {
+    "slots": 3,
+    "autosaveEveryGameHours": 4,
+    "offlineProgressCapRealHours": 8,
+    "_notes": "A1: 4 game hours = 30 real seconds at 1x. Buying anything on a price pad also saves."
+  },
+  "reputation": {
+    "_notes": "levelThresholds[i] = rep points needed for level i (0-10). A6: rep per on-time job = onTimeBase 1 + pay/100 (about 1-16); late 0, very late -5; thresholds fitted by the balance bot so rep 1 ~15 min, rep 3 ~1h15, rep 5 ~3h, rep 8 ~6.5h, rep 10 ~9h of play.",
+    "levelThresholds": [
+      0,
+      80,
+      350,
+      800,
+      1150,
+      2000,
+      3600,
+      6200,
+      9700,
+      14500,
+      20000
+    ],
+    "onTimeBase": 1,
+    "onTimePerPayDollars": 100,
+    "lateRep": 0,
+    "veryLateRep": -5,
+    "veryLateAfterDays": 1
+  },
+  "titles": [
+    {
+      "id": "side_hustler",
+      "name": "Side Hustler",
+      "minCompanyValue": 0
+    },
+    {
+      "id": "owner_operator",
+      "name": "Owner-Operator",
+      "minCompanyValue": 25000
+    },
+    {
+      "id": "small_business",
+      "name": "Small Business",
+      "minCompanyValue": 100000
+    },
+    {
+      "id": "regional_operator",
+      "name": "Regional Operator",
+      "minCompanyValue": 250000
+    },
+    {
+      "id": "statewide_fleet",
+      "name": "Statewide Fleet",
+      "minCompanyValue": 500000
+    },
+    {
+      "id": "drone_baron",
+      "name": "Drone Baron of Flyowa",
+      "minCompanyValue": 1000000
+    }
+  ],
+  "winCondition": {
+    "ownAllDroneTypes": true,
+    "quitDayJob": true,
+    "completedJob": "dot_corridor",
+    "minCompanyValue": 1000000
+  },
+  "_picked": [
+    "titles[].minCompanyValue (except the $1M Drone Baron)",
+    "arcade (all of it: real-second flight/render times, SD cards per flight, customer patience, pad recharge, price pad speed) - A1, retuned in A6",
+    "start.starterDrones media/thermal and save.autosaveEveryGameHours 4 (Oscar approved the media/thermal pick 2026-10-29)",
+    "A6 balance bot (test/balance, 2026-10-30): reputation (formula + levelThresholds), starterLoan.missedPaymentRep -5"
+  ],
+  "arcade": {
+    "_notes": "A1 (idle arcade). Job hours from jobs.json become real seconds at 1x. Flight: baseSec + secPerHour x flight hours, capped at maxSec. Render on the old laptop: scaleSec x renderHours^exponent, split evenly over the job's SD cards; a rig divides it by its PC tier speed and renders as many cards at once as the tier's queue slots. SD cards per flight: ceil(base + perFlightHour x flight hours), 1..max. A customer turns up when the ticket goes on a launch pad and waits patience = baseSec + factor x (flight + render seconds) before the job counts as late (late pay rules from jobs.json; 'very late' is one game day = 180 s past). Price pads: stand delaySec, then a full payment drains in fullSec. Before A4: SD cards per flight raised to ceil(2 + 2 x flight hours) (photos 3, wedding 6) so runners' stack upgrades matter; the render time is split across the cards, so the total is unchanged. rigBackedUpCards: a rig counts as full for the runner's 'When rigs are full' cloud setting when this many cards are waiting in its queue.",
+    "flight": {
+      "baseSec": 4,
+      "secPerHour": 4,
+      "maxSec": 40
+    },
+    "render": {
+      "scaleSec": 8,
+      "exponent": 0.75
+    },
+    "cards": {
+      "base": 2,
+      "perFlightHour": 2,
+      "max": 10
+    },
+    "patience": {
+      "baseSec": 60,
+      "factor": 2.5
+    },
+    "padRechargeSec": 2,
+    "serveSec": 0.5,
+    "pricePad": {
+      "delaySec": 0.4,
+      "fullSec": 1.6,
+      "repeatPauseSec": 1.2
+    },
+    "rigOutputMax": 12,
+    "padPileMax": 16,
+    "cashStackDollars": 50,
+    "rigBackedUpCards": 6
+  }
+}

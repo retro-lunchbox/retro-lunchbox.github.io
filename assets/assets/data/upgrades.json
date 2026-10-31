@@ -1,0 +1,263 @@
+{
+  "_notes": "Source: GAME_DESIGN.md sections 9, 14, 15. Values in _picked were chosen by Claude as placeholders (Oscar: tweak freely). Everything else is from GAME_DESIGN.md or Oscar's Phase 1 answers.",
+  "droneParts": [
+    {
+      "id": "carbon_props",
+      "name": "Carbon fiber propellers",
+      "price": 400,
+      "drones": "all",
+      "effect": {
+        "flightTimePct": 0.1,
+        "windToleranceMph": 3
+      },
+      "_notes": "A2 arcade: flightTimePct speeds up the drone's loop. Wind tolerance counts from A3.",
+      "description": "Flights 10% quicker (+3 mph wind tolerance once weather arrives in A3)"
+    },
+    {
+      "id": "extra_batteries",
+      "name": "Spare battery pack",
+      "price": 300,
+      "drones": "all",
+      "effect": {
+        "rechargePct": -0.5
+      },
+      "_notes": "A2 arcade: a part at the workbench (Phase 2 sold single batteries).",
+      "description": "Battery swaps between flights take half as long"
+    },
+    {
+      "id": "heated_batteries",
+      "name": "Heated batteries",
+      "price": 500,
+      "drones": "all",
+      "effect": {
+        "ignoresColdPenalty": true
+      },
+      "description": "Snow and extreme cold no longer slow flights"
+    },
+    {
+      "id": "high_wind_motors",
+      "name": "High-wind motors",
+      "price": 1200,
+      "drones": "all",
+      "effect": {
+        "canFlyWindy": true
+      },
+      "description": "Windy days no longer slow flights"
+    },
+    {
+      "id": "weatherproofing",
+      "name": "Weatherproofing",
+      "price": 2500,
+      "drones": "all",
+      "effect": {
+        "ignoresRain": true
+      },
+      "description": "Rain no longer slows flights or needs a dry-off"
+    },
+    {
+      "id": "rtk_gps",
+      "name": "RTK GPS module",
+      "price": 2500,
+      "drones": "all",
+      "effect": {
+        "payPctOnTags": {
+          "tags": [
+            "mapping",
+            "survey"
+          ],
+          "pct": 0.25
+        }
+      },
+      "description": "+25% pay on mapping, survey and LiDAR jobs"
+    },
+    {
+      "id": "obstacle_avoidance",
+      "name": "Obstacle avoidance sensors",
+      "price": 900,
+      "drones": "all",
+      "effect": {
+        "crashRiskPct": -0.4
+      },
+      "description": "40% lower crash and goose-strike odds"
+    },
+    {
+      "id": "better_sensor",
+      "name": "Better camera/sensor",
+      "price": 1500,
+      "drones": "all",
+      "effect": {
+        "payPct": 0.15
+      },
+      "description": "+15% pay on this drone's jobs"
+    },
+    {
+      "id": "big_spray_tank",
+      "name": "Bigger spray tank",
+      "price": 2000,
+      "drones": [
+        "spray"
+      ],
+      "effect": {
+        "refillFlightHours": -0.5
+      },
+      "description": "Refill trip 30 min shorter"
+    }
+  ],
+  "cosmetics": {
+    "paints": [
+      {
+        "id": "color",
+        "name": "Solid colors",
+        "price": 150,
+        "_notes": "Player picks one of the logo colors."
+      },
+      {
+        "id": "camo",
+        "name": "Camo",
+        "price": 300,
+        "tint": "#6B7A3A"
+      },
+      {
+        "id": "chrome",
+        "name": "Chrome",
+        "price": 600,
+        "tint": "#C9D1D9"
+      },
+      {
+        "id": "flyowa_flag",
+        "name": "Flyowa state flag",
+        "price": 400,
+        "tint": "#2A5DB0"
+      },
+      {
+        "id": "county_yellow",
+        "name": "County yellow",
+        "price": 250,
+        "tint": "#F2B705"
+      },
+      {
+        "id": "pothole_patrol",
+        "name": "Pothole Patrol",
+        "price": 0,
+        "tint": "#FF7A1A",
+        "arcade": "pothole_paddle",
+        "_notes": "Free once the top score in Pothole Paddle (Retro Lunchbox arcade) is beaten."
+      }
+    ],
+    "logoDecal": {
+      "price": 100
+    },
+    "_notes": "When every drone has a paint or decal, jobs earn 5% more rep.",
+    "professionalLookRepPct": 0.05
+  },
+  "hq": [
+    {
+      "id": "garage",
+      "name": "Garage",
+      "price": 0,
+      "droneSlots": 3,
+      "staffSlots": 0,
+      "passiveRepPerDay": 0
+    },
+    {
+      "id": "workshop",
+      "name": "Workshop",
+      "price": 15000,
+      "droneSlots": 5,
+      "staffSlots": 1,
+      "passiveRepPerDay": 1
+    },
+    {
+      "id": "office",
+      "name": "Office",
+      "price": 60000,
+      "droneSlots": 8,
+      "staffSlots": 3,
+      "passiveRepPerDay": 2
+    },
+    {
+      "id": "hangar",
+      "name": "Hangar",
+      "price": 200000,
+      "droneSlots": 12,
+      "staffSlots": 6,
+      "passiveRepPerDay": 4
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "pickup",
+      "name": "Pickup",
+      "price": 0
+    },
+    {
+      "id": "work_truck",
+      "name": "Work truck",
+      "price": 18000
+    },
+    {
+      "id": "spray_trailer",
+      "name": "Spray trailer rig",
+      "price": 9000
+    }
+  ],
+  "staff": {
+    "pilot": {
+      "weeklyWageBySkill": {
+        "rookie": 600,
+        "experienced": 900,
+        "ace": 1300
+      },
+      "crashRiskPctBySkill": {
+        "rookie": 0.5,
+        "experienced": 0,
+        "ace": -0.4
+      }
+    },
+    "processingTech": {
+      "weeklyWage": 800,
+      "effect": {
+        "renderTimePct": -0.1
+      }
+    }
+  },
+  "ai": [
+    {
+      "tier": 1,
+      "id": "ai_assistant",
+      "name": "AI Assistant",
+      "price": 5000,
+      "effect": "Highlights the best jobs, warns about weather/deadlines"
+    },
+    {
+      "tier": 2,
+      "id": "ai_bidder",
+      "name": "AI Bidder",
+      "price": 15000,
+      "effect": "Auto-accepts jobs matching filters (drone type, minimum pay, deadline)"
+    },
+    {
+      "tier": 3,
+      "id": "ai_processing",
+      "name": "AI Processing",
+      "price": 30000,
+      "effect": "Auto-queues renders, picks cloud vs local",
+      "renderTimePct": -0.2
+    },
+    {
+      "tier": 4,
+      "id": "ai_ops_manager",
+      "name": "AI Ops Manager",
+      "price": 75000,
+      "effect": "Assigns hired pilots and drones to jobs automatically"
+    }
+  ],
+  "_picked": [
+    "all droneParts prices and unstated effect sizes",
+    "all cosmetic prices + professionalLookRepPct",
+    "hq prices/slots/passive rep",
+    "vehicle prices",
+    "staff wages",
+    "weatherproofing $2,500 (Oscar: around $2,500 per drone)"
+  ]
+}

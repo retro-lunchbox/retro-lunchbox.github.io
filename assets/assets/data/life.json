@@ -1,0 +1,190 @@
+{
+  "_notes": "Day job, fatigue and weather. Source: GAME_DESIGN.md sections 10-11 + Oscar's answers. Values in _picked were chosen by Claude as placeholders (Oscar: tweak freely). Everything else is from GAME_DESIGN.md or Oscar's Phase 1 answers.",
+  "dayJob": {
+    "workdays": [
+      "mon",
+      "tue",
+      "wed",
+      "thu",
+      "fri"
+    ],
+    "shiftStart": "07:00",
+    "shiftEnd": "15:30",
+    "weeklyPay": 900,
+    "stormCallout": {
+      "seasons": [
+        "winter"
+      ],
+      "hoursMin": 8,
+      "hoursMax": 12,
+      "chancePerNight": 0.15,
+      "overtimePayPerHour": 35,
+      "rollHour": 22
+    },
+    "quitUnlock": {
+      "weeksAboveInARow": 3,
+      "price": 1500
+    },
+    "_notes": "A3 (idle arcade): at shiftStart on workdays you drive off to the county shed. The clock fast-forwards (fastForward x game speed) to shiftEnd while you're away; anything automated (workers, Jean Claude docks, rigs already rendering) keeps working, nothing you run by hand moves. Then a 'Welcome home' summary. The paycheck is paid at the end of the Friday shift: paystub.json grossPay minus withholding and 1-2 random county deductions (a pay stub in Welcome home). weeklyPay is the typical take-home, the bar the business has to beat to quit. Quit the Day Job: when business income (job cash collected minus wages) beats weeklyPay for quitUnlock.weeksAboveInARow paydays in a row, a price pad (quitUnlock.price) appears by the office; paying it ends shifts, callouts and the paycheck for good. Storm callouts: on winter nights at rollHour, chancePerNight of being called out for hoursMin-hoursMax game hours, paid overtimePayPerHour.",
+    "paydayWeekday": "fri",
+    "fastForward": 10
+  },
+  "fatigue": {
+    "min": 0,
+    "max": 100,
+    "doubleCrashRiskAbove": 70,
+    "cannotFlyAbove": 90,
+    "gainPerFlightHourAfterShift": 8,
+    "recoveryPerSleepHour": 8,
+    "recoveryPerDayOff": 30
+  },
+  "weather": [
+    {
+      "id": "clear",
+      "name": "Clear",
+      "icon": "sun",
+      "blurb": "Good flying"
+    },
+    {
+      "id": "windy",
+      "name": "Windy",
+      "icon": "wind",
+      "flightPct": 0.3,
+      "unlessPart": "high_wind_motors",
+      "blurb": "Flights 30% slower (high-wind motors ignore it)"
+    },
+    {
+      "id": "rain",
+      "name": "Rain",
+      "icon": "rain",
+      "flightPct": 0.5,
+      "dryOffSec": 5,
+      "unlessPart": "weatherproofing",
+      "blurb": "Flights 50% slower and a 5 s dry-off after landing (weatherproofing ignores both)"
+    },
+    {
+      "id": "showers",
+      "name": "Showers",
+      "icon": "rain",
+      "pauses": {
+        "everySec": 45,
+        "pauseSec": 15,
+        "label": "Shower"
+      },
+      "blurb": "Passing showers pause takeoffs for a few seconds"
+    },
+    {
+      "id": "fog",
+      "name": "Fog",
+      "icon": "fog",
+      "pauses": {
+        "everySec": 60,
+        "pauseSec": 10,
+        "label": "Fog bank"
+      },
+      "blurb": "Fog banks pause takeoffs for a few seconds"
+    },
+    {
+      "id": "snow",
+      "name": "Snow",
+      "icon": "snow",
+      "flightPct": 0.25,
+      "unlessPart": "heated_batteries",
+      "payPct": {
+        "thermal": 0.15
+      },
+      "blurb": "Flights 25% slower (heated batteries ignore it), thermal +15%"
+    },
+    {
+      "id": "extreme_cold",
+      "name": "Extreme Cold",
+      "icon": "cold",
+      "flightPct": 0.4,
+      "unlessPart": "heated_batteries",
+      "payPct": {
+        "thermal": 0.25
+      },
+      "blurb": "Flights 40% slower (heated batteries ignore it), thermal +25%"
+    }
+  ],
+  "weatherOddsBySeason": {
+    "spring": {
+      "clear": 0.5,
+      "windy": 0.15,
+      "showers": 0.15,
+      "fog": 0.1,
+      "rain": 0.1
+    },
+    "summer": {
+      "clear": 0.62,
+      "windy": 0.13,
+      "showers": 0.1,
+      "fog": 0.05,
+      "rain": 0.1
+    },
+    "fall": {
+      "clear": 0.5,
+      "windy": 0.2,
+      "showers": 0.1,
+      "fog": 0.1,
+      "rain": 0.1
+    },
+    "winter": {
+      "clear": 0.55,
+      "windy": 0.2,
+      "fog": 0.15,
+      "snow": 0.07,
+      "extreme_cold": 0.03
+    }
+  },
+  "_picked": [
+    "stormCallout chance/overtime/rollHour",
+    "fatigue rates (not used in the arcade game)",
+    "weatherOddsBySeason",
+    "dayJob.fastForward 10 (an 8.5 h shift takes about 6 real seconds)",
+    "quitUnlock: 3 paydays in a row, $1,500 pad (A6: 2 let you quit at ~30 min; 3 lands at 46-63 min)",
+    "every weather effect size and seasonPay bonus",
+    "crewTexts timing (every 1.5-3 game days) and the crew names"
+  ],
+  "seasonPay": {
+    "_notes": "A3: pay bonus (or cut) by drone type for jobs delivered in that season, on top of which jobs show up (jobs.json seasons).",
+    "spring": {
+      "media": 0.1,
+      "multispectral": 0.1
+    },
+    "summer": {
+      "spray": 0.15,
+      "multispectral": 0.1,
+      "media": 0.05
+    },
+    "fall": {
+      "multispectral": 0.1,
+      "lidar": 0.1
+    },
+    "winter": {
+      "thermal": 0.25,
+      "media": -0.15,
+      "lidar": 0.1
+    }
+  },
+  "_weatherNotes": "A6 (Oscar): never a dead day. Full-day bad weather (rain, snow, extreme cold) is about 1 day in 10 in every season. Rain: flights 50% slower plus a dry-off after each landing, both skipped with the weatherproofing part. Showers and fog only pause takeoffs now and then (pauses.everySec / pauseSec). Workers keep working in any weather.",
+  "crewTexts": {
+    "_notes": "A6 (Oscar): after you quit the day job, now and then a text from the old county shed crew shows on the HUD. Every everyGameDaysMin-Max game days (a game day is 3 real minutes). All names fictional. Add lines freely.",
+    "everyGameDaysMin": 1.5,
+    "everyGameDaysMax": 3,
+    "names": [
+      "Darlene",
+      "Big Mike",
+      "Gus",
+      "Shorty",
+      "Vern"
+    ],
+    "lines": [
+      "Supervisors bought new tires again. Glad you got out.",
+      "They put your old grader up for auction. Nobody knows how to run it.",
+      "Farmer on 180th says the road's worse since you left.",
+      "Coffee's still bad.",
+      "They're studying the gravel budget again."
+    ]
+  }
+}

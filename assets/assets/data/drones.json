@@ -1,0 +1,97 @@
+{
+  "_notes": "Source: GAME_DESIGN.md section 6. Batteries (Phase 2): a drone's daily flying = batteries x flightMinutesPerBattery; a job's flight (incl. any refill trip) uses that much charge, and every drone recharges fully each morning (balance.json batteries.rechargeHour). A 'battery' here is a day-sized pack sized so the starter 2 batteries cover a typical day of that drone's starter jobs. Values in _picked were chosen by Claude as placeholders (Oscar: tweak freely). Everything else is from GAME_DESIGN.md or Oscar's Phase 1 answers.",
+  "drones": [
+    {
+      "id": "media",
+      "name": "Enterprise (Media) Drone",
+      "price": 2500,
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "notes": "Cheapest, steady low-pay work, all seasons",
+      "requiresLicense": null,
+      "flightMinutesPerBattery": 45,
+      "windToleranceMph": 24,
+      "crashRiskPerFlightHour": 0.004,
+      "conditionWearPerFlightHour": 1.5
+    },
+    {
+      "id": "thermal",
+      "name": "Thermal Drone",
+      "price": 6000,
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "strongSeason": "winter",
+      "notes": "Strongest in winter",
+      "requiresLicense": null,
+      "flightMinutesPerBattery": 60,
+      "windToleranceMph": 22,
+      "crashRiskPerFlightHour": 0.004,
+      "conditionWearPerFlightHour": 1.5
+    },
+    {
+      "id": "multispectral",
+      "name": "Multispectral Drone",
+      "price": 9000,
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "notes": "Growing season only",
+      "requiresLicense": null,
+      "flightMinutesPerBattery": 60,
+      "windToleranceMph": 20,
+      "crashRiskPerFlightHour": 0.005,
+      "conditionWearPerFlightHour": 1.5
+    },
+    {
+      "id": "spray",
+      "name": "Spray Drone",
+      "price": 15000,
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "strongSeason": "summer",
+      "notes": "Summer heavy. Long flights, little/no render. Needs chemical refills. Grounded in wind like the other drones. Chemicals cost 30% of job pay; every job adds a 1h refill trip.",
+      "requiresLicense": "part137",
+      "flightMinutesPerBattery": 120,
+      "windToleranceMph": 18,
+      "crashRiskPerFlightHour": 0.008,
+      "conditionWearPerFlightHour": 2.5
+    },
+    {
+      "id": "lidar",
+      "name": "LiDAR Drone",
+      "price": 35000,
+      "seasons": [
+        "spring",
+        "summer",
+        "fall",
+        "winter"
+      ],
+      "strongSeason": "winter",
+      "notes": "Biggest pay, huge render times, needs high rep for best contracts",
+      "requiresLicense": null,
+      "flightMinutesPerBattery": 90,
+      "windToleranceMph": 20,
+      "crashRiskPerFlightHour": 0.005,
+      "conditionWearPerFlightHour": 2.0
+    }
+  ],
+  "_picked": [
+    "flightMinutesPerBattery",
+    "windToleranceMph",
+    "crashRiskPerFlightHour",
+    "conditionWearPerFlightHour"
+  ]
+}

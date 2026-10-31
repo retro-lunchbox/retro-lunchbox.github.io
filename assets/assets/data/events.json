@@ -1,0 +1,138 @@
+{
+  "_notes": "Random events. Source: GAME_DESIGN.md section 13. Wired up in Phase 5. Values in _picked were chosen by Claude as placeholders (Oscar: tweak freely). Everything else is from GAME_DESIGN.md or Oscar's Phase 1 answers.",
+  "insurance": {
+    "weeklyPremiumPctOfFleetValue": 0.004,
+    "coveragePct": 0.8
+  },
+  "events": [
+    {
+      "id": "crash",
+      "name": "Goose strike / tree / crash",
+      "chance": "see drones.crashRiskPerFlightHour",
+      "effect": "Drone damaged: repair cost and downtime. Insurance covers most of it.",
+      "repairPctOfDronePrice": 0.25,
+      "downtimeDays": 2
+    },
+    {
+      "id": "airspace_auth",
+      "name": "Airport nearby",
+      "chance": 0.08,
+      "effect": "Job needs airspace authorization: 1-day delay, or pay to speed it up",
+      "delayDays": 1,
+      "rushCost": 150,
+      "per": "job accepted"
+    },
+    {
+      "id": "late_payment",
+      "name": "Customer pays late",
+      "chance": 0.1,
+      "effect": "Payment delayed (net 15 / net 30)",
+      "per": "job delivered",
+      "net15Share": 0.7,
+      "net30Share": 0.3
+    },
+    {
+      "id": "viral_video",
+      "name": "Video goes viral",
+      "chance": 0.01,
+      "effect": "Rep boost + flood of media jobs",
+      "per": "day",
+      "rep": 60,
+      "extraMediaJobs": 4
+    },
+    {
+      "id": "equipment_sale",
+      "name": "Equipment sale at the drone shop",
+      "chance": 0.03,
+      "effect": "Shop discount",
+      "discountPct": 0.2,
+      "per": "day",
+      "days": 3
+    },
+    {
+      "id": "farmer_referral",
+      "name": "Farmer referral",
+      "chance": 0.04,
+      "effect": "Chain of 3 multispectral/spray jobs",
+      "jobCount": 3,
+      "per": "day"
+    },
+    {
+      "id": "rival_undercut",
+      "name": "Cyclone Aerial undercuts you",
+      "chance": 0.05,
+      "effect": "A job on your board disappears unless you match price",
+      "per": "day"
+    },
+    {
+      "id": "power_outage",
+      "name": "Power outage",
+      "chance": 0.05,
+      "effect": "Kills active renders unless backup power",
+      "per": "stormy day"
+    },
+    {
+      "id": "low_condition_malfunction",
+      "name": "Drone malfunction",
+      "chance": 0.05,
+      "effect": "Malfunction chance rises when condition is below 30%",
+      "conditionBelow": 0.3,
+      "per": "flight"
+    }
+  ],
+  "_picked": [
+    "every chance and amount below",
+    "insurance"
+  ],
+  "arcade": {
+    "_notes": "A7 arcade events (GAME_DESIGN 19.22). Crashes are rolled when a drone lands: chance = 1 - exp(-flight seconds x perFlightSecond x drone risk / 0.004 x weather x (1 + parts' crashRiskPct)). The flight's SD cards still come back; the drone goes to the workbench for repairSec (pay rushRepairPct of its price to fix it now). No events until graceJobs jobs are delivered; at most one drone per zone in repair. The other events are rolled once per game day (chancePerDay) and happen at a random moment that day. All numbers picked by Claude in A7.",
+    "graceJobs": 25,
+    "crash": {
+      "perFlightSecond": 0.0004,
+      "gooseShare": 0.45,
+      "repairSec": 60,
+      "rushRepairPct": 0.04,
+      "minRushRepair": 50,
+      "weatherRisk": {
+        "wind": 1.6,
+        "rain": 1.3,
+        "showers": 1.2,
+        "fog": 1.4,
+        "snow": 1.3
+      }
+    },
+    "rival": {
+      "chancePerDay": 0.2,
+      "steals": 2
+    },
+    "outage": {
+      "chancePerStormyDay": 0.5,
+      "stormy": [
+        "rain",
+        "showers",
+        "wind",
+        "snow"
+      ],
+      "pauseSec": 25,
+      "backupPrice": 2500
+    },
+    "viral": {
+      "chancePerDay": 0.06,
+      "rushSec": 60,
+      "printSpeed": 3,
+      "rep": 5,
+      "drone": "media"
+    },
+    "referral": {
+      "chancePerDay": 0.08,
+      "rushSec": 60,
+      "printSpeed": 3,
+      "zone": "farm"
+    },
+    "sale": {
+      "chancePerDay": 0.08,
+      "discountPct": 0.2,
+      "days": 1
+    }
+  }
+}

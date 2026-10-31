@@ -1,0 +1,77 @@
+{
+  "_notes": "Source: GAME_DESIGN.md section 8. Values in _picked were chosen by Claude as placeholders (Oscar: tweak freely). Everything else is from GAME_DESIGN.md or Oscar's Phase 1 answers.",
+  "tiers": [
+    {
+      "tier": 1,
+      "name": "Old laptop",
+      "price": 0,
+      "speed": 1,
+      "queueSlots": 1
+    },
+    {
+      "tier": 2,
+      "name": "Gaming PC",
+      "price": 1500,
+      "speed": 2,
+      "queueSlots": 2
+    },
+    {
+      "tier": 3,
+      "name": "Workstation",
+      "price": 5000,
+      "speed": 4,
+      "queueSlots": 2
+    },
+    {
+      "tier": 4,
+      "name": "Dual-GPU rig",
+      "price": 12000,
+      "speed": 8,
+      "queueSlots": 3
+    },
+    {
+      "tier": 5,
+      "name": "Render server rack",
+      "price": 30000,
+      "speed": 16,
+      "queueSlots": 4
+    }
+  ],
+  "cloud": {
+    "name": "Cloud processing",
+    "costPctOfJobPay": 0.1,
+    "speed": 20,
+    "unlimitedQueue": true
+  },
+  "renderUpgrades": [
+    {
+      "id": "ram",
+      "name": "More RAM",
+      "price": 800,
+      "effect": {
+        "queueSlots": 1
+      }
+    },
+    {
+      "id": "nvme",
+      "name": "NVMe storage",
+      "price": 600,
+      "effect": {
+        "renderTimePct": -0.1
+      }
+    },
+    {
+      "id": "backup_power",
+      "name": "Backup power",
+      "price": 1200,
+      "effect": {
+        "protectsRendersFromOutage": true
+      }
+    }
+  ],
+  "_picked": [
+    "cloud.speed",
+    "renderUpgrades[].price",
+    "A6 balance bot (test/balance, 2026-10-30): cloud costPctOfJobPay 0.10 (was 0.15); Jean Claude Processing only rushes cards whose customer would be late"
+  ]
+}

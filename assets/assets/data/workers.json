@@ -1,0 +1,93 @@
+{
+  "_notes": "A2 hired workers (GAME_DESIGN 19.4). Each role is hired once on its price pad in the garage (hirePrice) and is paid wagePerDay at midnight every game day (a game day is 3 real minutes). speed = tiles per second, carry = stack size. Upgrades are bought at the Help Wanted board: speed +speed.pct per level, carry +carry.plus per level; the player's own carry upgrades are there too. Pilot: kiosk -> launch pads with tickets. Runner: launch pads -> render rigs with SD cards, rigs -> counter with deliverables (never the cloud uplink). Clerk: staffs the counter. Collector: picks up cash. pickupWaitSec (Oscar, before A3): after picking up less than a full stack, a worker waits up to this long for more before walking off (sooner if the stack fills).",
+  "_picked": [
+    "every number in this file"
+  ],
+  "roles": [
+    {
+      "id": "pilot",
+      "name": "Pilot",
+      "hirePrice": 1500,
+      "wagePerDay": 40,
+      "speed": 2.2,
+      "carry": 3,
+      "look": {
+        "skin": "tone3",
+        "shirt": "green",
+        "jeans": "dark",
+        "hat": "trucker"
+      },
+      "badge": "#43A047"
+    },
+    {
+      "id": "runner",
+      "name": "Data runner",
+      "hirePrice": 2000,
+      "wagePerDay": 40,
+      "speed": 2.4,
+      "carry": 4,
+      "look": {
+        "skin": "tone5",
+        "shirt": "pink",
+        "jeans": "light",
+        "hat": "none"
+      },
+      "badge": "#E91E63"
+    },
+    {
+      "id": "clerk",
+      "name": "Front desk clerk",
+      "hirePrice": 1200,
+      "wagePerDay": 30,
+      "speed": 2.0,
+      "carry": 0,
+      "look": {
+        "skin": "tone1",
+        "shirt": "orange",
+        "jeans": "black",
+        "hat": "none"
+      },
+      "badge": "#FB8C00"
+    },
+    {
+      "id": "collector",
+      "name": "Cash collector",
+      "hirePrice": 800,
+      "wagePerDay": 25,
+      "speed": 2.4,
+      "carry": 0,
+      "look": {
+        "skin": "tone6",
+        "shirt": "green",
+        "jeans": "medium",
+        "hat": "beanie"
+      },
+      "badge": "#2E7D32"
+    }
+  ],
+  "speed": {
+    "pct": 0.2,
+    "prices": [
+      500,
+      1200,
+      2500
+    ]
+  },
+  "carry": {
+    "plus": 2,
+    "prices": [
+      600,
+      1400,
+      3000
+    ]
+  },
+  "playerCarry": {
+    "plus": 2,
+    "prices": [
+      300,
+      900,
+      2000
+    ]
+  },
+  "pickupWaitSec": 3
+}

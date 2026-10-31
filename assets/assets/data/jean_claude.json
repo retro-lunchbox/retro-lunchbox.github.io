@@ -1,0 +1,79 @@
+{
+  "_notes": "A5: Jean Claude, the AI pilot. Part 108 (office, rep 4) brings him at level 1. A Drone Dock is a price pad beside a launch pad; Jean Claude carries eligible tickets from that zone's kiosk onto docked pads himself (no pilot). His level is how many docked pads he runs at once (a docked pad counts while it has a flight going or queued). He never takes humanOnlyJobs or player-only jobs (search & rescue). He keeps working during the county shift. Upgrades are bought at the office desk.",
+  "_picked": "dock 6000 (section 15.1); level prices 12000/25000/50000; upgrade prices from section 15 (5000/15000/30000/75000); quip every 20 s at most. All retuned in A6.",
+  "dockPrice": 6000,
+  "humanOnlyJobs": [
+    "event_wedding",
+    "re_video"
+  ],
+  "levels": [
+    {
+      "pads": 1,
+      "price": 0
+    },
+    {
+      "pads": 2,
+      "price": 12000
+    },
+    {
+      "pads": 3,
+      "price": 25000
+    },
+    {
+      "pads": -1,
+      "price": 50000
+    }
+  ],
+  "upgrades": [
+    {
+      "id": "assistant",
+      "name": "Jean Claude Assistant",
+      "price": 5000,
+      "blurb": "An arrow points you to the most urgent job: the one whose customer runs out of patience first."
+    },
+    {
+      "id": "bidder",
+      "name": "Jean Claude Bidder",
+      "price": 15000,
+      "blurb": "Docked pads take the best-paying ticket on the board instead of the oldest."
+    },
+    {
+      "id": "processing",
+      "name": "Jean Claude Processing",
+      "price": 30000,
+      "blurb": "Rush jobs: SD cards that would wait in a rig queue past the customer's patience go to the cloud uplink instead (cloud fee, only if you can pay)."
+    },
+    {
+      "id": "opsManager",
+      "name": "Jean Claude Ops Manager",
+      "price": 75000,
+      "blurb": "Workers with nothing to do at home go help whichever zone is most backed up."
+    }
+  ],
+  "quipEverySec": 20,
+  "quips": {
+    "launch": [
+      "Allez, ze drone, she flies!",
+      "Jean Claude is on it, mon ami.",
+      "To ze skies! Hold my croissant.",
+      "Ze batteries are full, ze heart is full.",
+      "I fly, you relax. C'est parfait.",
+      "One more field? Pfff, easy."
+    ],
+    "land": [
+      "Ze field, she is mapped!",
+      "Voila! Ze data, she is ready.",
+      "Landed. Not one goose was harmed.",
+      "Magnifique. Somebody carry ze cards, oui?",
+      "Back home. Ze wind was rude today."
+    ],
+    "crash": [
+      "Zut! That goose had a death wish. And a very good lawyer.",
+      "I did not crash. I performed an unscheduled landing with style.",
+      "The tree moved. I have it on video. Mostly.",
+      "Small problem. The drone is now two drones. Please fetch the glue.",
+      "Ah, the classic goose-to-propeller handshake. Very French. Very messy.",
+      "It is fine. Everything is fine. Please do not look at the workbench."
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "_notes": "Player character options. Each option id maps to layer files in assets/images/character/: body_<skin>_<frame>.png, shirt_<shirt>_<frame>.png, jeans_<jeans>_<frame>.png, hat_<hat>.png (no file for 'none'). Frames: idle, walk1, walk2. Draw order: shadow, jeans, shirt, body, hat. 'color' is the swatch shown in the picker.",
+  "default": {"skin": "tone2", "shirt": "orange", "jeans": "medium", "hat": "hardhat"},
+  "skin": [
+    {"id": "tone1", "label": "Tone 1", "color": "#FFE2C8"},
+    {"id": "tone2", "label": "Tone 2", "color": "#F1C4A0"},
+    {"id": "tone3", "label": "Tone 3", "color": "#E0AC7D"},
+    {"id": "tone4", "label": "Tone 4", "color": "#C4865A"},
+    {"id": "tone5", "label": "Tone 5", "color": "#8E5838"},
+    {"id": "tone6", "label": "Tone 6", "color": "#5E3A28"}
+  ],
+  "shirt": [
+    {"id": "green", "label": "Hi-vis green", "color": "#B2DE28"},
+    {"id": "orange", "label": "Hi-vis orange", "color": "#FA821E"},
+    {"id": "pink", "label": "Hi-vis pink", "color": "#FF5CAA"}
+  ],
+  "jeans": [
+    {"id": "light", "label": "Light wash", "color": "#8CB0D6"},
+    {"id": "medium", "label": "Medium wash", "color": "#5276B0"},
+    {"id": "dark", "label": "Dark wash", "color": "#2C406E"},
+    {"id": "black", "label": "Black", "color": "#28282E"}
+  ],
+  "hat": [
+    {"id": "none", "label": "No hat", "color": "#00000000"},
+    {"id": "hardhat", "label": "Hard hat", "color": "#F6F6F2"},
+    {"id": "beanie", "label": "Winter beanie", "color": "#C83C3C"},
+    {"id": "trucker", "label": "Caterpillar cap", "color": "#2864C8"}
+  ]
+}

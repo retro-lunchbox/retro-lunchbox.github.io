@@ -1,0 +1,23 @@
+{
+  "_notes": "County paycheck stub (comedy). Every payday: grossPay, minus withholding, minus deductionsMin-deductionsMax random entries from the list (no repeats in one week; 'weight' is how often it comes up, default 1). Amounts are dollars; positive = a bonus. All fictional. Add more freely. Average take-home with the list below is about $900 (range about $630-$1,180).",
+  "employer": "Broom County Board of Supervisors",
+  "grossPay": 1400,
+  "withholding": { "text": "Taxes & withholding", "amount": -320 },
+  "deductionsMin": 1,
+  "deductionsMax": 2,
+  "deductions": [
+    { "text": "Supervisors bought new tires for their pickups. Your share", "amount": -180 },
+    { "text": "Farmer complained you bladed his road crooked", "amount": -120 },
+    { "text": "Supervisors' \"fact-finding trip\" to a road equipment expo in Vegas", "amount": -250 },
+    { "text": "The new grader is still in the shed. Nobody knows how to run it. Equipment fund", "amount": -200 },
+    { "text": "Mandatory safety vest training (the vests are the same)", "amount": -60 },
+    { "text": "You hit a mailbox plowing. It was a supervisor's mailbox", "amount": -150 },
+    { "text": "Supervisors voted to study whether to study the gravel budget. Consultant fee", "amount": -175 },
+    { "text": "Coffee fund for the shed. The coffee is bad", "amount": -25 },
+    { "text": "Someone left the shed door open all weekend. Heating bill", "amount": -140 },
+    { "text": "Farmer says your snowplow buried his driveway on purpose", "amount": -110 },
+    { "text": "New county logo on every truck. It's the old logo, but bigger", "amount": -190 },
+    { "text": "Supervisor meeting ran 4 hours about one culvert. Overtime for the minutes clerk", "amount": -80 },
+    { "text": "Rare good week: \"Supervisors were on vacation. Nothing broke.\" Bonus", "amount": 100, "weight": 0.5 }
+  ]
+}

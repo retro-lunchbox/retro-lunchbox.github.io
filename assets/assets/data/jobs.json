@@ -1,0 +1,373 @@
+{
+  "_notes": "Source: GAME_DESIGN.md section 7 + Oscar's Phase 1 answers. Render hours are on the tier-1 laptop. Jobs with no 'seasons' appear all year. Values in _picked were chosen by Claude as placeholders (Oscar: tweak freely). Everything else is from GAME_DESIGN.md or Oscar's Phase 1 answers. Phase 3: each job has a client tier (towns.json clientTiers); a tier's rep never exceeds its jobs' rep, so tiers label and announce work rather than re-gating it.",
+  "jobs": [
+    {
+      "id": "re_photos",
+      "name": "Real estate photos",
+      "drone": "media",
+      "flightHours": 0.5,
+      "renderHoursTier1": 1,
+      "pay": 75,
+      "repRequired": 0,
+      "client": "neighbors_realtors"
+    },
+    {
+      "id": "roof_photos",
+      "name": "Roof photos for insurance",
+      "drone": "media",
+      "flightHours": 0.5,
+      "renderHoursTier1": 0.5,
+      "pay": 45,
+      "repRequired": 0,
+      "client": "farmers_insurance"
+    },
+    {
+      "id": "re_video",
+      "name": "Real estate video tour",
+      "drone": "media",
+      "flightHours": 1,
+      "renderHoursTier1": 3,
+      "pay": 135,
+      "repRequired": 1,
+      "client": "neighbors_realtors"
+    },
+    {
+      "id": "event_wedding",
+      "name": "Event / wedding",
+      "drone": "media",
+      "flightHours": 2,
+      "renderHoursTier1": 4,
+      "pay": 180,
+      "repRequired": 2,
+      "seasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "client": "neighbors_realtors"
+    },
+    {
+      "id": "construction_progress",
+      "name": "Construction progress",
+      "drone": "media",
+      "flightHours": 1,
+      "renderHoursTier1": 2,
+      "pay": 90,
+      "repRequired": 3,
+      "recurring": "weekly",
+      "payPer": "week",
+      "seasons": [
+        "spring",
+        "summer",
+        "fall"
+      ],
+      "notes": "Weekly recurring contract comes in Phase 6; one-off until then",
+      "client": "contractors_developers"
+    },
+    {
+      "id": "orthomosaic",
+      "name": "Orthomosaic map",
+      "drone": "media",
+      "flightHours": 2,
+      "renderHoursTier1": 10,
+      "pay": 240,
+      "repRequired": 3,
+      "tags": [
+        "mapping"
+      ],
+      "client": "contractors_developers"
+    },
+    {
+      "id": "roof_heat_loss",
+      "name": "Roof heat-loss scan",
+      "drone": "thermal",
+      "flightHours": 1,
+      "renderHoursTier1": 2,
+      "pay": 120,
+      "repRequired": 0,
+      "client": "farmers_insurance"
+    },
+    {
+      "id": "livestock_count",
+      "name": "Livestock count",
+      "drone": "thermal",
+      "flightHours": 1.5,
+      "renderHoursTier1": 2,
+      "pay": 150,
+      "repRequired": 1,
+      "client": "farmers_insurance"
+    },
+    {
+      "id": "solar_inspection",
+      "name": "Solar panel inspection",
+      "drone": "thermal",
+      "flightHours": 2,
+      "renderHoursTier1": 4,
+      "pay": 210,
+      "repRequired": 2,
+      "client": "farmers_insurance"
+    },
+    {
+      "id": "search_rescue",
+      "name": "Search & rescue (lost hunter/pet)",
+      "drone": "thermal",
+      "flightHours": 2,
+      "renderHoursTier1": 0,
+      "pay": 0,
+      "repRequired": 0,
+      "repReward": 15,
+      "playerOnly": true,
+      "notes": "$0, big rep boost. Player only: workers never take it; it leaves the board quietly when you go to a shift.",
+      "client": "neighbors_realtors"
+    },
+    {
+      "id": "crop_health",
+      "name": "Crop health map (per field)",
+      "drone": "multispectral",
+      "flightHours": 1.5,
+      "renderHoursTier1": 6,
+      "pay": 225,
+      "repRequired": 0,
+      "tags": [
+        "mapping"
+      ],
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "client": "farmers_insurance"
+    },
+    {
+      "id": "seed_plot_trial",
+      "name": "Seed company plot trial",
+      "drone": "multispectral",
+      "flightHours": 2,
+      "renderHoursTier1": 8,
+      "pay": 625,
+      "repRequired": 4,
+      "multiWeek": true,
+      "tags": [
+        "mapping"
+      ],
+      "notes": "Multi-week trial comes in Phase 6; one-off until then",
+      "seasons": [
+        "spring",
+        "summer"
+      ],
+      "client": "farmers_insurance"
+    },
+    {
+      "id": "harvest_yield",
+      "name": "Harvest yield map",
+      "drone": "multispectral",
+      "flightHours": 1.5,
+      "renderHoursTier1": 5,
+      "pay": 175,
+      "repRequired": 0,
+      "seasons": [
+        "fall"
+      ],
+      "tags": [
+        "mapping"
+      ],
+      "client": "farmers_insurance"
+    },
+    {
+      "id": "coop_report",
+      "name": "Co-op crop data report",
+      "drone": "multispectral",
+      "flightHours": 0,
+      "renderHoursTier1": 4,
+      "pay": 100,
+      "repRequired": 0,
+      "seasons": [
+        "winter"
+      ],
+      "notes": "No flight: processing existing data only",
+      "client": "farmers_insurance"
+    },
+    {
+      "id": "spray_field",
+      "name": "Spray field",
+      "drone": "spray",
+      "flightHours": 3,
+      "renderHoursTier1": 0.5,
+      "pay": 375,
+      "repRequired": 0,
+      "chemicalCostPct": 0.3,
+      "refillFlightHours": 1,
+      "seasonWeights": {
+        "spring": 1,
+        "summer": 3,
+        "fall": 1
+      },
+      "client": "farmers_insurance"
+    },
+    {
+      "id": "stockpile_volume",
+      "name": "Stockpile volume measurement",
+      "drone": "lidar",
+      "flightHours": 1,
+      "renderHoursTier1": 8,
+      "pay": 95,
+      "repRequired": 0,
+      "tags": [
+        "survey"
+      ],
+      "client": "farmers_insurance"
+    },
+    {
+      "id": "topo_survey",
+      "name": "Topo survey",
+      "drone": "lidar",
+      "flightHours": 2,
+      "renderHoursTier1": 24,
+      "pay": 240,
+      "repRequired": 2,
+      "tags": [
+        "survey"
+      ],
+      "client": "contractors_developers"
+    },
+    {
+      "id": "building_3d",
+      "name": "Building 3D model",
+      "drone": "lidar",
+      "flightHours": 2,
+      "renderHoursTier1": 18,
+      "pay": 200,
+      "repRequired": 3,
+      "tags": [
+        "survey"
+      ],
+      "client": "contractors_developers"
+    },
+    {
+      "id": "construction_survey",
+      "name": "Construction site survey",
+      "drone": "lidar",
+      "flightHours": 3,
+      "renderHoursTier1": 30,
+      "pay": 400,
+      "repRequired": 4,
+      "tags": [
+        "survey"
+      ],
+      "client": "city_of_broom"
+    },
+    {
+      "id": "county_bridge_survey",
+      "name": "County road/bridge survey",
+      "drone": "lidar",
+      "flightHours": 4,
+      "renderHoursTier1": 48,
+      "pay": 480,
+      "repRequired": 6,
+      "tags": [
+        "survey"
+      ],
+      "client": "broom_county"
+    },
+    {
+      "id": "dot_corridor",
+      "name": "Flyowa DOT corridor contract",
+      "drone": "lidar",
+      "flightHours": 8,
+      "renderHoursTier1": 96,
+      "pay": 1500,
+      "repRequired": 9,
+      "tags": [
+        "survey"
+      ],
+      "deadlineDays": 14,
+      "client": "flyowa_dot"
+    }
+  ],
+  "_picked": [
+    "latePayPct / veryLatePayPct",
+    "seasons on media/spray/multispectral jobs not named by Oscar",
+    "spray_field seasonWeights (summer heavy)",
+    "every contract (A4)",
+    "A6 balance bot (test/balance, 2026-10-30): pay = the A5 pay x 0.30 for garage/yard jobs (media, thermal), x 0.25 farm, x 0.08 construction LiDAR, x 0.06 County jobs; contract bonuses x 0.08, contract rep x 0.5 (fail rep too), search & rescue rep 15; contracts.cooldownDays 2 (the county posts the next contract 2 game days after one ends)"
+  ],
+  "board": {
+    "morningHour": 6,
+    "morningCount": 3,
+    "middayHour": 12,
+    "middayCount": 1,
+    "maxJobs": 8,
+    "expireDays": 2,
+    "morningPerExtraType": 1,
+    "middayPerDroneTypes": 2,
+    "maxPerExtraType": 2,
+    "_notes": "Oscar 2026-10-28: morning = morningCount + morningPerExtraType per drone type owned beyond the first; midday = middayCount x ceil(types / middayPerDroneTypes); max = maxJobs + maxPerExtraType per extra type. Each morning one job is reserved for every owned drone type that has work in season and at your rep."
+  },
+  "deadlines": {
+    "_notes": "Days from accepting to delivery, by tier-1 render hours. A job's own deadlineDays overrides.",
+    "byRenderHours": [
+      {
+        "renderHoursUnder": 4,
+        "days": 2
+      },
+      {
+        "renderHoursUnder": 13,
+        "days": 3
+      },
+      {
+        "renderHoursUnder": 31,
+        "days": 5
+      },
+      {
+        "renderHoursUnder": 61,
+        "days": 7
+      }
+    ],
+    "fallbackDays": 7
+  },
+  "lateness": {
+    "latePayPct": -0.2,
+    "veryLatePayPct": -0.5
+  },
+  "contracts": {
+    "_notes": "A4: taken at the Contracts board in the County / DOT office, one at a time. Deliver `count` jobs of `job` within `days` game days of accepting for `bonus` cash and `rep` points on top of normal pay. Missing the deadline costs `failRep`. repRequired is a rep level.",
+    "list": [
+      {
+        "id": "stockpile_program",
+        "name": "Quarry stockpile program",
+        "client": "broom_county",
+        "job": "stockpile_volume",
+        "count": 4,
+        "days": 3,
+        "bonus": 500,
+        "rep": 20,
+        "failRep": -15,
+        "repRequired": 8
+      },
+      {
+        "id": "bridge_program",
+        "name": "County bridge inspection program",
+        "client": "broom_county",
+        "job": "county_bridge_survey",
+        "count": 3,
+        "days": 5,
+        "bonus": 1500,
+        "rep": 40,
+        "failRep": -30,
+        "repRequired": 8
+      },
+      {
+        "id": "dot_corridor_program",
+        "name": "Flyowa DOT corridor contract",
+        "client": "flyowa_dot",
+        "job": "dot_corridor",
+        "count": 2,
+        "days": 8,
+        "bonus": 5000,
+        "rep": 75,
+        "failRep": -50,
+        "repRequired": 9
+      }
+    ],
+    "cooldownDays": 2
+  }
+}
