@@ -48,6 +48,27 @@
     For more details:
     * https://docs.flutter.dev/platform-integration/web/initialization
   -->
+  <!-- How sharp the app is drawn: phones with 3x screens would otherwise draw
+       more than twice the pixels anyone can see. Caps window.devicePixelRatio
+       (the Flutter engine reads it on every resize); the app moves the cap
+       (lib/arcade/arcade_perf.dart RenderScale). ?res=1.5 fixes it for testing. -->
+  <script>
+    (function () {
+      var d = Object.getOwnPropertyDescriptor(Window.prototype, 'devicePixelRatio') ||
+        Object.getOwnPropertyDescriptor(window, 'devicePixelRatio');
+      if (!d || !d.get) return;
+      var real = function () { return d.get.call(window); };
+      var force = parseFloat(new URLSearchParams(location.search).get('res'));
+      window.lunchboxRender = { cap: 2, force: force >= 0.5 && force <= 4 ? force : null, real: real };
+      Object.defineProperty(window, 'devicePixelRatio', {
+        configurable: true,
+        get: function () {
+          var r = real(), s = window.lunchboxRender, c = s.force != null ? s.force : s.cap;
+          return c > 0 && r > c ? c : r;
+        }
+      });
+    })();
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

@@ -38,10 +38,20 @@ addEventListener("message", eventListener);
 if (!window._flutter) {
   window._flutter = {};
 }
-_flutter.buildConfig = {"engineRevision":"cf636b1dfb818dd6a3ff16e390e93b1a036969c8","wasmHashes":{"canvaskit.wasm":"fbed517a43e82452404446683f00f2e876d835aed84410695759e67b6bb01cd3","chromium/canvaskit.wasm":"ae8ff1d858140f7b1300ced3fa89fb8c9dce0a400a0f4f1e11f6dcfb3315fdcf","skwasm.wasm":"e540fd5e8303b7b68ec2718cb49e9c421f8ade3075b15e02a7059a62654df9a1","skwasm_heavy.wasm":"565f5cc1cca6ab120f11934b105f01fec4b58b480c82e0889dca93af8e6f8635","webparagraph/canvaskit.wasm":"0ce1b05082efdc8529550e8a01f6ff0593972d55525035010e26f5600aa9f254","wimp.wasm":"e924eaafd801d41e017d178f3fd5cf8a417f641fe35c9ed34a4e1d7582283e0c"},"builds":[{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"},{}],"useLocalCanvasKit":true};
+_flutter.buildConfig = {"engineRevision":"cf636b1dfb818dd6a3ff16e390e93b1a036969c8","wasmHashes":{"canvaskit.wasm":"fbed517a43e82452404446683f00f2e876d835aed84410695759e67b6bb01cd3","chromium/canvaskit.wasm":"ae8ff1d858140f7b1300ced3fa89fb8c9dce0a400a0f4f1e11f6dcfb3315fdcf","skwasm.wasm":"e540fd5e8303b7b68ec2718cb49e9c421f8ade3075b15e02a7059a62654df9a1","skwasm_heavy.wasm":"565f5cc1cca6ab120f11934b105f01fec4b58b480c82e0889dca93af8e6f8635","webparagraph/canvaskit.wasm":"0ce1b05082efdc8529550e8a01f6ff0593972d55525035010e26f5600aa9f254","wimp.wasm":"e924eaafd801d41e017d178f3fd5cf8a417f641fe35c9ed34a4e1d7582283e0c","main.dart.wasm":"b0560abb3268033061be50e2d5ba014d4133e0cee4afab09c5e7c0297ce9c797"},"builds":[{"compileTarget":"dart2wasm","renderer":"skwasm","mainWasmPath":"main.dart.wasm","jsSupportRuntimePath":"main.dart.mjs"},{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"}],"useLocalCanvasKit":true};
 
+
+// The site is built twice (tool/publish_web.sh: --wasm): CanvasKit (JavaScript)
+// and skwasm (WebAssembly). CanvasKit is the default everywhere (Flutter itself
+// turns skwasm off in Safari); ?renderer=skwasm in the address tries skwasm
+// where the browser supports it, to compare frame rates (tap a score 5 times).
+const lunchboxSkwasm = new URLSearchParams(location.search).get('renderer') === 'skwasm';
 _flutter.loader.load({
+  config: {
+    wasmAllowList: { blink: lunchboxSkwasm, gecko: lunchboxSkwasm, webkit: lunchboxSkwasm },
+    suppressMultithreadingWarning: true,
+  },
   serviceWorkerSettings: {
-    serviceWorkerVersion: "611196952" /* Flutter's service worker is deprecated and will be removed in a future Flutter release. */
-  }
+    serviceWorkerVersion: "2714832105" /* Flutter's service worker is deprecated and will be removed in a future Flutter release. */,
+  },
 });
